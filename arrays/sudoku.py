@@ -1,3 +1,4 @@
+from typing import List
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         d = {}
@@ -15,14 +16,21 @@ class Solution:
                     return False
             d.clear()
         for box in range(9):
+            #print(box)
             start = self.fixBox(box)
+            #print(start)
             for num in range(9):
                 if (box == 4):
+                    print(num)
+                    print(start + int(num%3))
+                    print(num%3 + 3*(box%3))
                 val = board[start + int(num/3)][num%3 + 3*(box%3)]
                 d[val] = d.get(val,0) + 1
                 if d[val] > 1 and val != ".":
                     #print(d)
                     return False
+            if box == 5:
+                print(d)
             d.clear()
         return True
 
@@ -34,3 +42,6 @@ class Solution:
         else:
             row = 6
         return row
+
+a = Solution()
+print(a.isValidSudoku([[".",".",".","1",".","8",".",".","."],[".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".","."],["4",".",".",".",".","7",".",".","."],[".",".",".","7",".",".","8","4","1"],[".",".",".",".","7",".",".",".","."],[".",".",".",".",".",".","6",".","."],[".",".",".","6",".",".",".",".","."],["6",".",".",".",".",".",".",".","."]]))
